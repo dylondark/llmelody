@@ -10,6 +10,20 @@ ApplicationWindow {
 
     header: ToolBar {
         id: topBar
+
+        Row {
+            anchors.fill: parent
+
+            ToolButton {
+                text: "File"
+            }
+            ToolButton {
+                text: "Edit"
+            }
+            ToolButton {
+                text: "Settings"
+            }
+        }
     }
 
     Pane {
