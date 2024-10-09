@@ -6,7 +6,7 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("llmelody - Waiting for Connection...")
 
     header: ToolBar {
         id: topBar
