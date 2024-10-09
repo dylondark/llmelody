@@ -19,5 +19,27 @@ ApplicationWindow {
 
     footer: ToolBar {
         id: bottomBar
+
+        RowLayout {
+            anchors.fill: parent
+
+            Label {
+                id: ollamaStatus
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                text: "Ollama: <font color=\"#FF0000\">Not Connected</font>"
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+            }
+
+            Label {
+                id: programStatus
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                text: "Waiting for Connection..."
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignRight
+            }
+        }
     }
 }
