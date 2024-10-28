@@ -12,4 +12,9 @@ ApplicationWindow {
     visible: true
     title: "llmelody - Ollama Config"
     flags: Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
+
+    Pane {
+        id: base
+        anchors.fill: parent
+    }
 }
