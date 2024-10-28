@@ -5,8 +5,13 @@ import QtQuick.Layouts
 ApplicationWindow {
     width: 640
     height: 480
+    maximumWidth: 640
+    maximumHeight: 480
+    minimumWidth: 640
+    minimumHeight: 480
     visible: true
     title: qsTr("llmelody - Waiting for Connection...")
+    flags: Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
 
     menuBar: MenuBar {
         Menu {
