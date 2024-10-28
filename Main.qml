@@ -42,7 +42,243 @@ ApplicationWindow {
 
     Pane {
         id: base
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        GridLayout {
+            id: baseLayout
+            anchors.fill: parent
+            columns: 2
+
+            // ROW: INSTRUMENT
+            Label {
+                text: "Instrument: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            ComboBox {
+                id: instrumentComboBox
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                editable: true
+                model: ["Piano", "Guitar", "Bass", "Synth", "Strings", "Brass", "Woodwinds"]
+                delegate: ItemDelegate {
+                    text: modelData
+                    width: parent.width
+                    font.pixelSize: 12
+                }
+            }
+
+            // ROW: TEMPO
+            Label {
+                text: "Tempo: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                Slider {
+                    id: tempoSlider
+                    from: 30
+                    to: 300
+                    value: 120
+                    stepSize: 1
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+
+                    onValueChanged: {
+                        tempoField.text = tempoSlider.value;
+                    }
+                }
+                TextField {
+                    id: tempoField
+                    Layout.preferredWidth: 40
+                    text: "120"
+                    validator: IntValidator { bottom: 30; top: 300 }
+                    onTextChanged: {
+                        if (tempoField.text !== "") {
+                            tempoSlider.value = parseInt(tempoField.text);
+                        }
+                    }
+                }
+                Label {
+                    id: bpmLabel
+                    text: " BPM"
+                }
+            }
+
+            // ROW: TIME SIGNATURE
+            Label {
+                text: "Time Signature: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                TextField {
+                    id: timeSigTop
+                    Layout.preferredWidth: 40
+                    text: "4"
+                    validator: IntValidator { bottom: 1; top: 20 }
+                }
+                Label {
+                    text: "/"
+                }
+                TextField {
+                    id: timeSigBottom
+                    Layout.preferredWidth: 40
+                    text: "4"
+                    validator: IntValidator { bottom: 1; top: 20 }
+                }
+            }
+
+            // ROW: LENGTH
+            Label {
+                text: "Length: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                Slider {
+                    id: lengthSlider
+                    from: 1
+                    to: 32
+                    value: 8
+                    stepSize: 1
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+
+                    onValueChanged: {
+                        lengthField.text = lengthSlider.value;
+                    }
+                }
+                TextField {
+                    id: lengthField
+                    Layout.preferredWidth: 40
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+                    text: "8"
+                    validator: IntValidator { bottom: 1; top: 32 }
+
+                    onTextChanged: {
+                        if (lengthField.text !== "") {
+                            lengthSlider.value = parseInt(lengthField.text);
+                        }
+                    }
+                }
+                Label {
+                    text: " measures"
+                }
+            }
+
+            // ROW: KEY
+            Label {
+                text: "Key: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                ComboBox {
+                    id: keyComboBox
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+                    model: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+                    delegate: ItemDelegate {
+                        text: modelData
+                        width: parent.width
+                        font.pixelSize: 12
+                    }
+                }
+                ComboBox {
+                    id: scaleComboBox
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+                    model: ["Major", "Minor"]
+                    delegate: ItemDelegate {
+                        text: modelData
+                        width: parent.width
+                        font.pixelSize: 12
+                    }
+                }
+            }
+
+            // ROW: MOOD
+            Label {
+                text: "Mood: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            TextField {
+                id: moodField
+                text: "Happy"
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+
+            // ROW: SONG SECTION
+            Label {
+                text: "Song Section: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            ComboBox {
+                id: sectionComboBox
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                editable: true
+                model: ["Verse", "Chorus", "Bridge", "Outro"]
+                delegate: ItemDelegate {
+                    text: modelData
+                    width: parent.width
+                    font.pixelSize: 12
+                }
+            }
+
+            // ROW: EXTRA INFO
+            Label {
+                text: "Extra Info (optional): "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            TextField {
+                id: extraInfoField
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+
+            Item {
+                // blank item to take up label space
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                Button {
+                    id: generateButton
+                    text: "Generate"
+                }
+                Button {
+                    id: resetButton
+                    text: "Reset"
+                }
+            }
+        }
     }
 
     footer: ToolBar {
