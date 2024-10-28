@@ -281,6 +281,19 @@ ApplicationWindow {
                 Button {
                     id: resetButton
                     text: "Reset"
+
+                    onClicked: {
+                        instrumentComboBox.currentIndex = 0;
+                        tempoSlider.value = 120;
+                        timeSigTop.text = "4";
+                        timeSigBottom.text = "4";
+                        lengthSlider.value = 8;
+                        keyComboBox.currentIndex = 0;
+                        scaleComboBox.currentIndex = 0;
+                        moodField.text = "Happy";
+                        sectionComboBox.currentIndex = 0;
+                        extraInfoField.text = "";
+                    }
                 }
             }
         }
