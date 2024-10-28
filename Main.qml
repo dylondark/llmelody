@@ -47,13 +47,13 @@ ApplicationWindow {
 
     Pane {
         id: base
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
+        anchors.fill: parent
 
         GridLayout {
             id: baseLayout
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
             columns: 2
 
             // ROW: INSTRUMENT
