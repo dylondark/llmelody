@@ -16,5 +16,25 @@ ApplicationWindow {
     Pane {
         id: base
         anchors.fill: parent
+
+        GridLayout {
+            id: baseLayout
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            columns: 2
+
+            // ROW: URL
+            Label {
+                text: "URL: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillWidth: true
+            }
+            TextField {
+                id: urlField
+                text: "http://localhost:11434"
+                Layout.fillWidth: true
+            }
+        }
     }
 }
