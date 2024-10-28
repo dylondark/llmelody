@@ -8,20 +8,34 @@ ApplicationWindow {
     visible: true
     title: qsTr("llmelody - Waiting for Connection...")
 
-    header: ToolBar {
-        id: topBar
-
-        Row {
-            anchors.fill: parent
-
-            ToolButton {
-                text: "File"
+    menuBar: MenuBar {
+        Menu {
+            title: qsTr("File")
+            MenuItem {
+                text: qsTr("Exit")
+                onTriggered: Qt.quit()
             }
-            ToolButton {
-                text: "Edit"
+        }
+        Menu {
+            title: qsTr("Options")
+            MenuItem {
+                text: qsTr("Settings")
+                onTriggered: {
+                    var component = Qt.createComponent("Settings.qml");
+                    var settings = component.createObject(base);
+                    settings.show();
+                }
             }
-            ToolButton {
-                text: "Settings"
+        }
+        Menu {
+            title: qsTr("Help")
+            MenuItem {
+                text: qsTr("About")
+                onTriggered: {
+                    var component = Qt.createComponent("About.qml");
+                    var about = component.createObject(base);
+                    about.show();
+                }
             }
         }
     }
