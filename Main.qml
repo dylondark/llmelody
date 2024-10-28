@@ -19,11 +19,11 @@ ApplicationWindow {
         Menu {
             title: qsTr("Options")
             MenuItem {
-                text: qsTr("Settings")
+                text: qsTr("Ollama Configuration...")
                 onTriggered: {
-                    var component = Qt.createComponent("Settings.qml");
-                    var settings = component.createObject(base);
-                    settings.show();
+                    var component = Qt.createComponent("OllamaConfig.qml");
+                    var ollamaConfig = component.createObject(base);
+                    ollamaConfig.show();
                 }
             }
         }
