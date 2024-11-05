@@ -54,6 +54,23 @@ ApplicationWindow {
                     font.pixelSize: 12
                 }
             }
+
+            // ROW: EDIT PROMPT
+            Label {
+                text: "Edit Prompt: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillWidth: true
+            }
+            Button {
+                id: editPromptButton
+                text: "Edit..."
+                Layout.fillWidth: true
+                onClicked: {
+                    var component = Qt.createComponent("OllamaPrompt.qml");
+                    var ollamaPrompt = component.createObject(base);
+                    ollamaPrompt.show();
+                }
+            }
         }
     }
 }
