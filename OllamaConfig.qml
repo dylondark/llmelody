@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 ApplicationWindow {
+    id: rootOllamaConfig
     width: 400
     height: 200
     minimumWidth: 400
@@ -79,6 +80,18 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: 10
+        }
+
+        Button {
+            id: okButton
+            text: "OK"
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            anchors.margins: 10
+            onClicked: {
+                // save the settings
+                rootOllamaConfig.close();
+            }
         }
     }
 }
