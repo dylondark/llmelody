@@ -253,6 +253,26 @@ ApplicationWindow {
                 }
             }
 
+            // ROW: GENRE
+            Label {
+                text: "Genre: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            ComboBox {
+                id: genreComboBox
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                editable: true
+                model: ["Pop", "Rock", "Jazz", "Blues", "Country", "Folk", "Classical", "Reggae", "Rap", "Hip-Hop", "R&B", "Soul", "Electronic", "Dance", "Metal", "Punk", "Alternative", "Indie", "World", "New Age", "Ambient", "Experimental", "Other"]
+                delegate: ItemDelegate {
+                    text: modelData
+                    width: parent.width
+                    font.pixelSize: 12
+                }
+            }
+
             // ROW: EXTRA INFO
             Label {
                 text: "Extra Info (optional): "
