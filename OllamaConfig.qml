@@ -79,7 +79,7 @@ ApplicationWindow {
             text: "Ping"
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            anchors.margins: 10
+            anchors.margins: 4
         }
 
         Button {
@@ -87,7 +87,7 @@ ApplicationWindow {
             text: "OK"
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            anchors.margins: 10
+            anchors.margins: 4
             onClicked: {
                 // save the settings
                 rootOllamaConfig.close();
