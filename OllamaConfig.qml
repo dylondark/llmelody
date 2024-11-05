@@ -72,5 +72,13 @@ ApplicationWindow {
                 }
             }
         }
+
+        Button {
+            id: pingButton
+            text: "Ping"
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.margins: 10
+        }
     }
 }
