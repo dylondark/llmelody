@@ -20,7 +20,7 @@ public:
     /*
         Returns whether the object is connected to Ollama or not.
     */
-    bool isConnected();
+    bool isConnected() const;
 
     /*
         Sets the URL of the Ollama server.
@@ -30,7 +30,7 @@ public:
     /*
         Returns the URL of the Ollama server.
     */
-    string getURL();
+    string getURL() const;
 
     /*
         Sets the model to use.
@@ -40,7 +40,7 @@ public:
     /*
         Returns the model to use.
     */
-    string getModel();
+    string getModel() const;
 
 private:
     bool connected;

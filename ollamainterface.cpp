@@ -15,7 +15,7 @@ bool OllamaInterface::ping()
 /*
     Returns whether the object is connected to Ollama or not.
 */
-bool OllamaInterface::isConnected()
+bool OllamaInterface::isConnected() const
 {
     return connected;
 }
@@ -31,7 +31,7 @@ void OllamaInterface::setURL(string url)
 /*
     Returns the URL of the Ollama server.
 */
-string OllamaInterface::getURL()
+string OllamaInterface::getURL() const
 {
     return url;
 }
@@ -47,7 +47,7 @@ void OllamaInterface::setModel(string model)
 /*
     Returns the model to use.
 */
-string OllamaInterface::getModel()
+string OllamaInterface::getModel() const
 {
     return model;
 }
