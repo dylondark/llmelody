@@ -18,6 +18,7 @@ qt_add_qml_module(appllmelody
     QML_FILES
         Main.qml
         QML_FILES OllamaConfig.qml
+        SOURCES MidiMessage.h MidiMessage.cpp MidiFile.h MidiFile.cpp MidiEvent.h MidiEvent.cpp MidiEventList.h MidiEventList.cpp Binasc.h Binasc.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
