@@ -9,6 +9,12 @@ class OllamaInterface
 {
 public:
     OllamaInterface();
+
+    /*
+        Pings the Ollama server to check if it is available.
+
+        Returns whether the ping was successful and sets the connected flag accordingly.
+    */
     bool ping();
 
     /*

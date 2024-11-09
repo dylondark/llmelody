@@ -3,6 +3,16 @@
 OllamaInterface::OllamaInterface() {}
 
 /*
+    Pings the Ollama server to check if it is available.
+
+    Returns whether the ping was successful and sets the connected flag accordingly.
+*/
+bool OllamaInterface::ping()
+{
+    return false; // Placeholder
+}
+
+/*
     Returns whether the object is connected to Ollama or not.
 */
 bool OllamaInterface::isConnected()
