@@ -90,6 +90,8 @@ ApplicationWindow {
             anchors.margins: 4
             onClicked: {
                 // save the settings
+                controller.setURL(urlField.text);
+                controller.setModel(modelComboBox.currentText);
                 rootOllamaConfig.close();
             }
         }
