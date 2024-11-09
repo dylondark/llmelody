@@ -10,6 +10,10 @@ class OllamaInterface
 public:
     OllamaInterface();
     bool ping();
+
+    /*
+        Returns whether the object is connected to Ollama or not.
+    */
     bool isConnected();
 
 private:
