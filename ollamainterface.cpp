@@ -1,4 +1,5 @@
 #include "ollamainterface.h"
+#include <curl/curl.h>
 
 OllamaInterface::OllamaInterface(string url, string model)
     : connected(false), url(url), model(model)
@@ -13,7 +14,23 @@ OllamaInterface::OllamaInterface(string url, string model)
 */
 bool OllamaInterface::ping()
 {
-    return false; // Placeholder
+    CURL *curl = curl_easy_init();
+    if (curl)
+    {
+        curl_easy_setopt(curl, CURLOPT_URL, (url + "/ping").c_str());
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
+        CURLcode res = curl_easy_perform(curl);
+        if (res == CURLE_OK)
+        {
+            connected = true;
+        }
+        else
+        {
+            connected = false;
+        }
+        curl_easy_cleanup(curl);
+    }
+    return connected;
 }
 
 /*
