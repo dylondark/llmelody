@@ -8,7 +8,7 @@ using std::string;
 class OllamaInterface
 {
 public:
-    OllamaInterface();
+    OllamaInterface(string url, string model);
 
     /*
         Pings the Ollama server to check if it is available.

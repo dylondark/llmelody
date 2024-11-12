@@ -1,7 +1,7 @@
 #include "programcontroller.h"
 
 ProgramController::ProgramController(QObject *parent)
-    : QObject{parent}
+    : QObject(parent), ollama("http://localhost:11434", "llama3.2:3b")
 {}
 
 /*

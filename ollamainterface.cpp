@@ -1,6 +1,10 @@
 #include "ollamainterface.h"
 
-OllamaInterface::OllamaInterface() {}
+OllamaInterface::OllamaInterface(string url, string model)
+    : connected(false), url(url), model(model)
+{
+    ping();
+}
 
 /*
     Pings the Ollama server to check if it is available.
