@@ -77,11 +77,22 @@ ApplicationWindow {
         }
 
         Button {
-            id: pingButton
-            text: "Ping"
+            id: cancelButton
+            text: "Cancel"
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: 4
+            onClicked: {
+                rootOllamaConfig.close();
+            }
+        }
+
+        Label {
+            id: statusLabel
+            text: ""
+            anchors.left: cancelButton.right
+            anchors.verticalCenter: cancelButton.verticalCenter
+            anchors.leftMargin: 5
         }
 
         Button {
