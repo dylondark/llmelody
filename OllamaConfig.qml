@@ -18,6 +18,15 @@ ApplicationWindow {
         id: base
         anchors.fill: parent
 
+        Component.onCompleted:
+        {
+            // load settings
+            urlField.text = controller.getURL();
+
+            // add model string from controller to modelComboBox if necessary
+            modelField.text = controller.getModel();
+        }
+
         GridLayout {
             id: baseLayout
             anchors.left: parent.left
@@ -43,17 +52,10 @@ ApplicationWindow {
                 horizontalAlignment: Text.AlignRight
                 Layout.fillWidth: true
             }
-            ComboBox {
-                id: modelComboBox
-                Layout.fillHeight: false
+            TextField {
+                id: modelField
+                text: "llama3.2:3b"
                 Layout.fillWidth: true
-                editable: true
-                model: ["llama3.2:3b", "llama3.2:1b", "llama3.1:8b", "llama3.1:70b", "llama3.1:405b", "mistral", "gemma2:2b", "gemma2:9b", "gemma2:27b"]
-                delegate: ItemDelegate {
-                    text: modelData
-                    width: parent.width
-                    font.pixelSize: 12
-                }
             }
 
             // ROW: EDIT PROMPT
@@ -91,7 +93,7 @@ ApplicationWindow {
             onClicked: {
                 // save the settings
                 controller.setURL(urlField.text);
-                controller.setModel(modelComboBox.currentText);
+                controller.setModel(modelField.text);
                 rootOllamaConfig.close();
             }
         }
