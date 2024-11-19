@@ -15,6 +15,7 @@ ApplicationWindow {
     flags: Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
 
     Component.onCompleted: {
+        controller.pingOllama();
         updateOllamaStatus();
     }
 

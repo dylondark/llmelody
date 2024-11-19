@@ -38,6 +38,11 @@ public:
     Q_INVOKABLE QString getModel() const;
 
     /*
+        Pings the Ollama server and returns the status.
+    */
+    Q_INVOKABLE bool pingOllama();
+
+    /*
         Returns whether the Ollama server is connected.
     */
     Q_INVOKABLE bool getOllamaStatus();

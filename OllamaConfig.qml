@@ -14,6 +14,12 @@ ApplicationWindow {
     title: "llmelody - Ollama Config"
     flags: Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
 
+    // update ollama status on close
+    onClosing: {
+        controller.pingOllama();
+        root.updateOllamaStatus();
+    }
+
     Pane {
         id: base
         anchors.fill: parent
@@ -111,9 +117,8 @@ ApplicationWindow {
                 controller.setModel(modelField.text);
 
                 // test ollama connection
-                if (controller.getOllamaStatus())
+                if (controller.pingOllama())
                 {
-                    root.updateOllamaStatus();
                     rootOllamaConfig.close();
                 }
                 else
@@ -121,6 +126,7 @@ ApplicationWindow {
                     statusLabel.text = "<font color=\"#FF0000\">Connection failed!</font>";
                     controller.setURL(oldURL);
                     controller.setModel(oldModel);
+                    controller.ping();
                 }
             }
         }

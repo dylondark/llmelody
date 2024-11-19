@@ -37,9 +37,18 @@ QString ProgramController::getModel() const
 }
 
 /*
+    Pings the Ollama server and returns the status.
+*/
+bool ProgramController::pingOllama()
+{
+    return ollama.ping();
+}
+
+/*
     Returns whether the Ollama server is connected.
 */
 bool ProgramController::getOllamaStatus()
 {
-    return ollama.ping();
+    return ollama.isConnected();
 }
+
