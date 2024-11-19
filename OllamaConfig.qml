@@ -102,10 +102,26 @@ ApplicationWindow {
             anchors.right: parent.right
             anchors.margins: 4
             onClicked: {
+                // save the old settings so that we can revert if necessary
+                var oldURL = controller.getURL();
+                var oldModel = controller.getModel();
+
                 // save the settings
                 controller.setURL(urlField.text);
                 controller.setModel(modelField.text);
-                rootOllamaConfig.close();
+
+                // test ollama connection
+                if (controller.getOllamaStatus())
+                {
+                    root.updateOllamaStatus();
+                    rootOllamaConfig.close();
+                }
+                else
+                {
+                    statusLabel.text = "<font color=\"#FF0000\">Connection failed!</font>";
+                    controller.setURL(oldURL);
+                    controller.setModel(oldModel);
+                }
             }
         }
     }
