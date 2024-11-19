@@ -47,6 +47,11 @@ public:
     */
     Q_INVOKABLE bool getOllamaStatus();
 
+    /*
+        Prompt the model, decode its output, and prompt user to save.
+    */
+    Q_INVOKABLE void generate();
+
 private:
     OllamaInterface ollama;
 };

@@ -52,3 +52,10 @@ bool ProgramController::getOllamaStatus()
     return ollama.isConnected();
 }
 
+/*
+    Prompt the model, decode its output, and prompt user to save.
+*/
+void ProgramController::generate()
+{
+    // placeholder
+}
