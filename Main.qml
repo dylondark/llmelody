@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 ApplicationWindow {
+    id: root
     width: 640
     height: 480
     maximumWidth: 640
@@ -10,17 +11,26 @@ ApplicationWindow {
     minimumWidth: 640
     minimumHeight: 480
     visible: true
-    title: qsTr("llmelody - Waiting for Connection...")
+    title: "llmelody - Waiting for Connection..."
     flags: Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
 
     Component.onCompleted: {
+        updateOllamaStatus();
+    }
+
+    function updateOllamaStatus()
+    {
         if (controller.getOllamaStatus())
         {
             ollamaStatus.text = "Ollama: <font color=\"#00FF00\">Connected</font>";
+            root.title = "llmelody - Ready";
+            programStatus.text = "Ready";
         }
         else
         {
             ollamaStatus.text = "Ollama: <font color=\"#FF0000\">Not Connected</font>";
+            root.title = "llmelody - Waiting for Connection...";
+            programStatus.text = "Waiting for Connection...";
         }
     }
 
