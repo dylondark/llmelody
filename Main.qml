@@ -13,6 +13,17 @@ ApplicationWindow {
     title: qsTr("llmelody - Waiting for Connection...")
     flags: Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
 
+    Component.onCompleted: {
+        if (controller.getOllamaStatus())
+        {
+            ollamaStatus.text = "Ollama: <font color=\"#00FF00\">Connected</font>";
+        }
+        else
+        {
+            ollamaStatus.text = "Ollama: <font color=\"#FF0000\">Not Connected</font>";
+        }
+    }
+
     menuBar: MenuBar {
         Menu {
             title: qsTr("File")

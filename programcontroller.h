@@ -37,6 +37,11 @@ public:
     */
     Q_INVOKABLE QString getModel() const;
 
+    /*
+        Returns whether the Ollama server is connected.
+    */
+    Q_INVOKABLE bool getOllamaStatus();
+
 private:
     OllamaInterface ollama;
 };

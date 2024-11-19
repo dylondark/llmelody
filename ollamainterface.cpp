@@ -4,7 +4,6 @@
 OllamaInterface::OllamaInterface(string url, string model)
     : connected(false), url(url), model(model)
 {
-    ping();
 }
 
 /*

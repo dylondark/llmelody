@@ -35,3 +35,11 @@ QString ProgramController::getModel() const
 {
     return QString::fromStdString(ollama.getModel());
 }
+
+/*
+    Returns whether the Ollama server is connected.
+*/
+bool ProgramController::getOllamaStatus()
+{
+    return ollama.ping();
+}
