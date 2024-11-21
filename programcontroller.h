@@ -54,6 +54,12 @@ public:
 
 private:
     OllamaInterface ollama;
+    QString systemPrompt;
+
+    /*
+        Assemble the system prompt.
+    */
+    QString createSystemPrompt();
 };
 
 #endif // PROGRAMCONTROLLER_H
