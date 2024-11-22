@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QtQmlIntegration>
+#include "prompt.h"
 #include "ollamainterface.h"
 
 /*
@@ -50,7 +51,12 @@ public:
     /*
         Prompt the model, decode its output, and prompt user to save.
     */
-    Q_INVOKABLE void generate();
+    Q_INVOKABLE void generate(const Prompt& prompt);
+
+    /*
+        Factory method for creating a new prompt for use in QML.
+    */
+    Q_INVOKABLE Prompt createPrompt();
 
 private:
     OllamaInterface ollama;

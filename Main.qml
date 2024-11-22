@@ -319,6 +319,24 @@ ApplicationWindow {
                 Button {
                     id: generateButton
                     text: "Generate"
+
+                    onClicked: {
+                        // Create a new Prompt instance using the controller's method
+                        var prompt = controller.createPrompt();
+                        prompt.instrument = instrumentComboBox.currentText;
+                        prompt.tempo = parseInt(tempoField.text);
+                        prompt.timeSignatureNumerator = parseInt(timeSigTop.text);
+                        prompt.timeSignatureDenominator = parseInt(timeSigBottom.text);
+                        prompt.length = parseInt(lengthField.text);
+                        prompt.keySignature = keyComboBox.currentText;
+                        prompt.keyMinor = (scaleComboBox.currentText === "Minor");
+                        prompt.mood = moodField.text;
+                        prompt.part = sectionComboBox.currentText;
+                        prompt.genre = genreComboBox.currentText;
+                        prompt.extraInfo = extraInfoField.text;
+
+                        controller.generate(prompt);
+                    }
                 }
                 Button {
                     id: resetButton

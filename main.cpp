@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include "prompt.h"
 #include "programcontroller.h"
 
 int main(int argc, char *argv[])
@@ -14,6 +15,8 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+
+    qRegisterMetaType<Prompt>("Prompt");
 
     // create ProgramController and make it accessible in QML
     ProgramController controller;

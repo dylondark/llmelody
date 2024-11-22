@@ -56,7 +56,15 @@ bool ProgramController::getOllamaStatus()
 /*
     Prompt the model, decode its output, and prompt user to save.
 */
-void ProgramController::generate()
+void ProgramController::generate(const Prompt& prompt)
 {
-    // placeholder
+
+}
+
+/*
+    Factory method for creating a new prompt for use in QML.
+*/
+Prompt ProgramController::createPrompt()
+{
+    return Prompt();
 }

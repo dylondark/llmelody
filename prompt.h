@@ -1,27 +1,41 @@
 #ifndef PROMPT_H
 #define PROMPT_H
 
-#include <string>
+#include <QObject>
+#include <QString>
 
-using std::string;
+struct Prompt {
+    Q_GADGET
 
-struct Prompt
-{
-    string instrument;
+    // Properties for QML
+    Q_PROPERTY(QString instrument MEMBER instrument)
+    Q_PROPERTY(int tempo MEMBER tempo)
+    Q_PROPERTY(int timeSignatureNumerator MEMBER timeSignatureNumerator)
+    Q_PROPERTY(int timeSignatureDenominator MEMBER timeSignatureDenominator)
+    Q_PROPERTY(int length MEMBER length)
+    Q_PROPERTY(QString keySignature MEMBER keySignature)
+    Q_PROPERTY(bool keyMinor MEMBER keyMinor)
+    Q_PROPERTY(QString mood MEMBER mood)
+    Q_PROPERTY(QString part MEMBER part)
+    Q_PROPERTY(QString genre MEMBER genre)
+    Q_PROPERTY(QString extraInfo MEMBER extraInfo)
+
+public:
+    QString instrument;
     int tempo;
     int timeSignatureNumerator;
     int timeSignatureDenominator;
     int length;
-    char keySignature;
+    QString keySignature;
     bool keyMinor;
-    string mood;
-    string part;
-    string genre;
-    string extraInfo;
+    QString mood;
+    QString part;
+    QString genre;
+    QString extraInfo;
 
-    string getSystemPrompt()
+    QString getSystemPrompt()
     {
-        string prompt = ("You will be asked to write individual instrument parts for songs. You will be given information about the song including its tempo, time signature, and mood. You will be given information about the individual part you are to write, such as its length in measures, instrument it is for, and what part of the song it is for (i.e. chorus, verse, etc). You are to respond with the part written in the following format for every note: '[note],[octave],[duration],[velocity],[start_time]'. The output will be parsed to MIDI. Output only the notes and assume every new prompt is for a new song.\n");
+        QString prompt = ("You will be asked to write individual instrument parts for songs. You will be given information about the song including its tempo, time signature, and mood. You will be given information about the individual part you are to write, such as its length in measures, instrument it is for, and what part of the song it is for (i.e. chorus, verse, etc). You are to respond with the part written in the following format for every note: '[note],[octave],[duration],[velocity],[start_time]'. The output will be parsed to MIDI. Output only the notes and assume every new prompt is for a new song.\n");
         prompt.append("The following is using the format\n");
         prompt.append("C,4,1/4,100,0 | E,4,1/4,100,0 | G,4,1/4,100,0  # C major chord, quarter note, starts at beat 0\n");
         prompt.append("G,5,1/4,100,1/4                               # G5 single note, quarter note, starts at beat 1/4\n");
@@ -35,9 +49,9 @@ struct Prompt
         return prompt;
     };
 
-    string getUserPrompt()
+    QString getUserPrompt()
     {
-        string prompt = ("The user has requested a part for a ");
+        QString prompt = ("The user has requested a part for a ");
         prompt.append(instrument);
         prompt.append(". The tempo for the song is ");
         prompt.append(std::to_string(tempo));
@@ -48,7 +62,7 @@ struct Prompt
         prompt.append(". The length of the part is ");
         prompt.append(std::to_string(length));
         prompt.append(" measures. The key signature for the song is ");
-        prompt.append(1, keySignature);
+        prompt.append(keySignature);
         prompt.append(keyMinor ? " minor. " : " major. ");
         prompt.append("The mood of the song is ");
         prompt.append(mood);
@@ -57,7 +71,7 @@ struct Prompt
         prompt.append(" of the song. The genre of the song is ");
         prompt.append(genre);
         prompt.append(". ");
-        if (!extraInfo.empty())
+        if (!extraInfo.isEmpty())
         {
             prompt.append("The user has provided the following additional info: ");
             prompt.append(extraInfo);
@@ -66,5 +80,7 @@ struct Prompt
         return prompt;
     }
 };
+
+Q_DECLARE_METATYPE(Prompt)
 
 #endif // PROMPT_H
