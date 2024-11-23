@@ -58,7 +58,7 @@ bool ProgramController::getOllamaStatus()
 */
 void ProgramController::generate(const Prompt& prompt)
 {
-
+    ollama.sendPrompt(prompt.getSystemPrompt().toStdString(), prompt.getUserPrompt().toStdString());
 }
 
 /*

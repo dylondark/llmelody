@@ -1,7 +1,9 @@
 #ifndef OLLAMAINTERFACE_H
 #define OLLAMAINTERFACE_H
 
+#include <QThread>
 #include <string>
+#include "threadworker.h"
 
 using std::string;
 
@@ -9,6 +11,8 @@ class OllamaInterface
 {
 public:
     OllamaInterface(string url, string model);
+
+    ~OllamaInterface();
 
     /*
         Pings the Ollama server to check if it is available.
@@ -42,10 +46,22 @@ public:
     */
     string getModel() const;
 
+    /*
+        Prompts the model and begins waiting for response.
+    */
+    void sendPrompt(string systemPrompt, string userPrompt);
+
 private:
     bool connected;
     string url;
     string model;
+    QThread requestThread;
+    ThreadWorker worker;
+
+    /*
+        Callback function to handle the response from the Ollama server.
+    */
+    static size_t writeCallback(void *contents, size_t size, size_t nmemb, void *userp);
 };
 
 #endif // OLLAMAINTERFACE_H

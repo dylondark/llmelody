@@ -23,6 +23,7 @@ qt_add_qml_module(appllmelody
         SOURCES ollamainterface.h ollamainterface.cpp
         SOURCES programcontroller.h programcontroller.cpp
         SOURCES prompt.h
+        SOURCES threadworker.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
