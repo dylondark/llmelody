@@ -98,7 +98,7 @@ void OllamaInterface::sendPrompt(string systemPrompt, string userPrompt)
 
             // Set the HTTP POST data
             string data = R"({
-        "model": "llama3.1:8b",
+        "model": ")" + model + R"(",
         "messages": [
             {
                 "role": "system",
