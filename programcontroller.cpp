@@ -55,7 +55,7 @@ bool ProgramController::getOllamaStatus()
 }
 
 /*
-    Prompt the model, decode its output, and prompt user to save.
+    Prompt the model and begin waiting on response.
 */
 void ProgramController::generate(const Prompt& prompt)
 {
@@ -72,6 +72,7 @@ Prompt ProgramController::createPrompt()
 
 /*
     Slot to be called when Ollama finishes generating a response.
+    Decodes the output and then invokes abc2midi to convert the output to a MIDI file.
 */
 void ProgramController::onGenerateFinished(QString response)
 {

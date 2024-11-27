@@ -49,7 +49,7 @@ public:
     Q_INVOKABLE bool getOllamaStatus();
 
     /*
-        Prompt the model, decode its output, and prompt user to save.
+        Prompt the model and begin waiting on response.
     */
     Q_INVOKABLE void generate(const Prompt& prompt);
 
@@ -67,6 +67,7 @@ signals:
 private slots:
     /*
         Slot to be called when Ollama finishes generating a response.
+        Decodes the output and then invokes abc2midi to convert the output to a MIDI file.
     */
     void onGenerateFinished(QString response);
 
