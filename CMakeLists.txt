@@ -19,7 +19,7 @@ qt_add_qml_module(appllmelody
     QML_FILES
         Main.qml
         QML_FILES OllamaConfig.qml
-        SOURCES MidiMessage.h MidiMessage.cpp MidiFile.h MidiFile.cpp MidiEvent.h MidiEvent.cpp MidiEventList.h MidiEventList.cpp Binasc.h Binasc.cpp
+        SOURCES
         SOURCES ollamainterface.h ollamainterface.cpp
         SOURCES programcontroller.h programcontroller.cpp
         SOURCES prompt.h
