@@ -132,10 +132,10 @@ void OllamaInterface::sendPrompt(string systemPrompt, string userPrompt)
 
             // Check for errors
             if (res != CURLE_OK) {
-                std::cerr << "cURL error: " << curl_easy_strerror(res) << std::endl;
+                std::cerr << "cURL error: " << curl_easy_strerror(res) << "\n";
             } else {
                 // Print the response
-                std::cout << "Response from server: " << response << std::endl;
+                std::cout << "Response from server: " << response << "\n";
             }
 
             // Cleanup

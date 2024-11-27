@@ -1,4 +1,6 @@
 #include "programcontroller.h"
+#include <nlohmann/json.hpp>
+#include <iostream>
 
 ProgramController::ProgramController(QObject *parent)
     : QObject(parent), ollama("http://localhost:11434", "llama3.2:3b")
@@ -76,5 +78,21 @@ Prompt ProgramController::createPrompt()
 */
 void ProgramController::onGenerateFinished(QString response)
 {
+    // parse the response
+    nlohmann::json json_obj = nlohmann::json::parse(response.toStdString());
+    QString content = QString::fromStdString(json_obj["message"]["content"].get<std::string>());
+
+    // invoke abc2midi to convert to midi
+    // get application directory
+    QString appDir = QCoreApplication::applicationDirPath();
+    QProcess abc2midi;
+    abc2midi.start("abc2midi", QStringList() << "-" << "-o" << appDir + "/output.mid");
+    abc2midi.write(content.toStdString().c_str());
+    abc2midi.closeWriteChannel();
+    abc2midi.waitForFinished();
+    // forward output to console
+    std::cout << "abc2midi out: " << abc2midi.readAllStandardOutput().toStdString() << "\n";
+    abc2midi.close();
+
     emit generateFinished(response);
 }
