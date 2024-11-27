@@ -141,6 +141,9 @@ void OllamaInterface::sendPrompt(string systemPrompt, string userPrompt)
             // Cleanup
             curl_slist_free_all(headers);
             curl_easy_cleanup(curl);
+
+            // Emit the response
+            emit responseReceived(QString::fromStdString(response));
         }
     });
 }

@@ -3,6 +3,7 @@
 ProgramController::ProgramController(QObject *parent)
     : QObject(parent), ollama("http://localhost:11434", "llama3.2:3b")
 {
+    connect(&ollama, &OllamaInterface::responseReceived, this, &ProgramController::onGenerateFinished);
 }
 
 /*
@@ -67,4 +68,12 @@ void ProgramController::generate(const Prompt& prompt)
 Prompt ProgramController::createPrompt()
 {
     return Prompt();
+}
+
+/*
+    Slot to be called when Ollama finishes generating a response.
+*/
+void ProgramController::onGenerateFinished(QString response)
+{
+    emit generateFinished(response);
 }

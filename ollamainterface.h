@@ -1,14 +1,16 @@
 #ifndef OLLAMAINTERFACE_H
 #define OLLAMAINTERFACE_H
 
+#include <QObject>
 #include <QThread>
 #include <string>
 #include "threadworker.h"
 
 using std::string;
 
-class OllamaInterface
+class OllamaInterface : public QObject
 {
+    Q_OBJECT
 public:
     OllamaInterface(string url, string model);
 
@@ -50,6 +52,9 @@ public:
         Prompts the model and begins waiting for response.
     */
     void sendPrompt(string systemPrompt, string userPrompt);
+
+signals:
+    void responseReceived(QString response);
 
 private:
     bool connected;

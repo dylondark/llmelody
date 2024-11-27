@@ -58,6 +58,18 @@ public:
     */
     Q_INVOKABLE Prompt createPrompt();
 
+signals:
+    /*
+        Signal to be emitted when Ollama finishes generating a response to pass the response on to QML.
+    */
+    void generateFinished(QString response);
+
+private slots:
+    /*
+        Slot to be called when Ollama finishes generating a response.
+    */
+    void onGenerateFinished(QString response);
+
 private:
     OllamaInterface ollama;
 };

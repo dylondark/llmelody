@@ -336,6 +336,9 @@ ApplicationWindow {
                         prompt.extraInfo = extraInfoField.text;
 
                         controller.generate(prompt);
+
+                        root.title = "llmelody - Generating...";
+                        programStatus.text = "Generating...";
                     }
                 }
                 Button {
@@ -354,6 +357,13 @@ ApplicationWindow {
                         sectionComboBox.currentIndex = 0;
                         extraInfoField.text = "";
                     }
+                }
+            }
+
+            Connections {
+                target: controller
+                function onGenerateFinished(response: string) {
+                    root.updateOllamaStatus();
                 }
             }
         }
