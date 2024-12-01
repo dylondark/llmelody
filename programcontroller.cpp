@@ -62,6 +62,7 @@ bool ProgramController::getOllamaStatus()
 void ProgramController::generate(const Prompt& prompt)
 {
     ollama.sendPrompt(prompt.getSystemPrompt().toStdString(), prompt.getUserPrompt().toStdString());
+    lastPrompt = prompt;
 }
 
 /*
@@ -86,7 +87,7 @@ void ProgramController::onGenerateFinished(QString response)
     // get application directory
     QString appDir = QCoreApplication::applicationDirPath();
     QProcess abc2midi;
-    abc2midi.start("abc2midi", QStringList() << "-" << "-o" << appDir + "/output.mid");
+    abc2midi.start("abc2midi", QStringList() << "-" << "-o" << lastPrompt.destFile);
     abc2midi.write(content.toStdString().c_str());
     abc2midi.closeWriteChannel();
     abc2midi.waitForFinished();

@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
+import QtCore
 
 ApplicationWindow {
     id: root
@@ -308,6 +310,40 @@ ApplicationWindow {
                 Layout.fillWidth: true
             }
 
+            // ROW: DESTINATION FILE
+            Label {
+                text: "Destination File: "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                TextField {
+                    id: destinationFileField
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+                }
+                Button {
+                    text: "Browse..."
+                    onClicked: saveDialog.open();
+                    }
+                }
+
+            FileDialog {
+                id: saveDialog
+                title: "Select Destination File"
+                fileMode: FileDialog.SaveFile
+                defaultSuffix: ".mid"
+                currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+                nameFilters: ["MIDI Files (*.mid)"]
+                onAccepted: {
+                    destinationFileField.text = saveDialog.selectedFile;
+                    destinationFileField.text = destinationFileField.text.replace("file://", "");
+                }
+            }
+
             Item {
                 // blank item to take up label space
                 Layout.fillHeight: false
@@ -334,6 +370,7 @@ ApplicationWindow {
                         prompt.part = sectionComboBox.currentText;
                         prompt.genre = genreComboBox.currentText;
                         prompt.extraInfo = extraInfoField.text;
+                        prompt.destFile = destinationFileField.text;
 
                         controller.generate(prompt);
 

@@ -19,6 +19,7 @@ struct Prompt {
     Q_PROPERTY(QString part MEMBER part)
     Q_PROPERTY(QString genre MEMBER genre)
     Q_PROPERTY(QString extraInfo MEMBER extraInfo)
+    Q_PROPERTY(QString destFile MEMBER destFile)
 
 public:
     QString instrument;
@@ -32,6 +33,7 @@ public:
     QString part;
     QString genre;
     QString extraInfo;
+    QString destFile;
 
     QString getSystemPrompt() const
     {

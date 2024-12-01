@@ -73,6 +73,7 @@ private slots:
 
 private:
     OllamaInterface ollama;
+    Prompt lastPrompt;
 };
 
 #endif // PROGRAMCONTROLLER_H
