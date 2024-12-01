@@ -357,6 +357,12 @@ ApplicationWindow {
                     text: "Generate"
 
                     onClicked: {
+                        if (destinationFileField.text === "")
+                        {
+                            programStatus.text = "Please select a destination file.";
+                            return;
+                        }
+
                         // Create a new Prompt instance using the controller's method
                         var prompt = controller.createPrompt();
                         prompt.instrument = instrumentComboBox.currentText;
