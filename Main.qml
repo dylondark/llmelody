@@ -382,6 +382,7 @@ ApplicationWindow {
 
                         root.title = "llmelody - Generating...";
                         programStatus.text = "Generating...";
+                        generateButton.enabled = false;
                     }
                 }
                 Button {
@@ -407,6 +408,7 @@ ApplicationWindow {
                 target: controller
                 function onGenerateFinished(response: string) {
                     root.updateOllamaStatus();
+                    generateButton.enabled = true;
                 }
             }
         }
