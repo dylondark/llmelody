@@ -64,6 +64,11 @@ signals:
     */
     void generateFinished(QString response);
 
+    /*
+        Signal to be emitted when the response from Ollama could not be parsed.
+    */
+    void promptParserError(QString response);
+
 private slots:
     /*
         Slot to be called when Ollama finishes generating a response.

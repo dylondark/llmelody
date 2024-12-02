@@ -444,6 +444,22 @@ ApplicationWindow {
                     root.updateOllamaStatus();
                     generateButton.enabled = true;
                 }
+
+                function onPromptParserError(response: string) {
+                    parserErrorDialog.informativeText = "Response: " + response;
+                    parserErrorDialog.open();
+                }
+            }
+
+            MessageDialog {
+                id: parserErrorDialog
+                title: "Parser Error"
+                text: "There was an error parsing the output from Ollama."
+                onAccepted: {
+                    parserErrorDialog.visible = false;
+                    generateButton.enabled = true;
+                    root.updateOllamaStatus();
+                }
             }
         }
     }

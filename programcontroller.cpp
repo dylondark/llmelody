@@ -80,20 +80,28 @@ Prompt ProgramController::createPrompt()
 void ProgramController::onGenerateFinished(QString response)
 {
     // parse the response
-    nlohmann::json json_obj = nlohmann::json::parse(response.toStdString());
-    QString content = QString::fromStdString(json_obj["message"]["content"].get<std::string>());
+    try
+    {
+        nlohmann::json json_obj = nlohmann::json::parse(response.toStdString());
+        QString content = QString::fromStdString(json_obj["message"]["content"].get<std::string>());
 
-    // invoke abc2midi to convert to midi
-    // get application directory
-    QString appDir = QCoreApplication::applicationDirPath();
-    QProcess abc2midi;
-    abc2midi.start("abc2midi", QStringList() << "-" << "-o" << lastPrompt.destFile);
-    abc2midi.write(content.toStdString().c_str());
-    abc2midi.closeWriteChannel();
-    abc2midi.waitForFinished();
-    // forward output to console
-    std::cout << "abc2midi out: " << abc2midi.readAllStandardOutput().toStdString() << "\n";
-    abc2midi.close();
+        // invoke abc2midi to convert to midi
+        // get application directory
+        QString appDir = QCoreApplication::applicationDirPath();
+        QProcess abc2midi;
+        abc2midi.start("abc2midi", QStringList() << "-" << "-o" << lastPrompt.destFile);
+        abc2midi.write(content.toStdString().c_str());
+        abc2midi.closeWriteChannel();
+        abc2midi.waitForFinished();
+        // forward output to console
+        std::cout << "abc2midi out: " << abc2midi.readAllStandardOutput().toStdString() << "\n";
+        abc2midi.close();
+    }
+    catch (...)
+    {
+        emit promptParserError(response);
+        return;
+    }
 
     emit generateFinished(response);
 }
