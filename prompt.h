@@ -3,11 +3,13 @@
 
 #include <QObject>
 #include <QString>
+#include <QProcess>
 
 struct Prompt {
     Q_GADGET
 
     // Properties for QML
+    Q_PROPERTY(QString recomposeFile MEMBER recomposeFile)
     Q_PROPERTY(QString instrument MEMBER instrument)
     Q_PROPERTY(int tempo MEMBER tempo)
     Q_PROPERTY(int timeSignatureNumerator MEMBER timeSignatureNumerator)
@@ -22,6 +24,7 @@ struct Prompt {
     Q_PROPERTY(QString destFile MEMBER destFile)
 
 public:
+    QString recomposeFile;
     QString instrument;
     int tempo;
     int timeSignatureNumerator;
@@ -37,14 +40,17 @@ public:
 
     QString getSystemPrompt() const
     {
-        QString prompt = ("You will be asked to write individual instrument parts for songs. You are to respond with the output in ABC musical notation format. Output ONLY the ABC information.");
-
+        QString prompt;
+        if (recomposeFile == "")
+            prompt = "You will be asked to write individual instrument parts for songs. You are to respond with the output in ABC musical notation format. Output ONLY the ABC information.";
+        else
+            prompt = "You will be given an instrument part in ABC notation. You are to recompose the part with the information given. Respond with the output in ABC musical notation format. Output ONLY the ABC information.";
         return prompt;
     };
 
     QString getUserPrompt() const
     {
-        QString prompt = ("The user has requested a part for a ");
+        QString prompt = recomposeFile == "" ? "The user has requested a part for a " : "The user has requested to recompose a part for a ";
         prompt.append(instrument);
         prompt.append(". The tempo for the song is ");
         prompt.append(std::to_string(tempo));
@@ -68,6 +74,15 @@ public:
         {
             prompt.append("The user has provided the following additional info: ");
             prompt.append(extraInfo);
+        }
+        if (recomposeFile != "")
+        {
+            prompt.append("\\nHere is the part to recompose in ABC form: ");
+            QProcess midi2abc;
+            midi2abc.start("midi2abc", QStringList() << recomposeFile);
+            midi2abc.waitForFinished();
+            prompt.append(QString(midi2abc.readAllStandardOutput()).replace("\n", "\\n"));
+            midi2abc.close();
         }
 
         return prompt;

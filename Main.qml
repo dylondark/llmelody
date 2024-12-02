@@ -78,7 +78,40 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
+            anchors.topMargin: -5
             columns: 2
+
+            // ROW: RECOMPOSE FILE
+            Label {
+                text: "Recompose File (optional): "
+                horizontalAlignment: Text.AlignRight
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Layout.fillWidth: true
+
+                TextField {
+                    id: recomposeFileField
+                    Layout.fillHeight: false
+                    Layout.fillWidth: true
+                }
+                Button {
+                    text: "Browse..."
+                    onClicked: recomposeDialog.open();
+                }
+            }
+            FileDialog {
+                id: recomposeDialog
+                title: "Select Recompose File"
+                fileMode: FileDialog.OpenFile
+                currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+                nameFilters: ["MIDI Files (*.mid)"]
+                onAccepted: {
+                    recomposeFileField.text = recomposeDialog.selectedFile;
+                    recomposeFileField.text = recomposeFileField.text.replace("file://", "");
+                }
+            }
 
             // ROW: INSTRUMENT
             Label {
@@ -365,6 +398,7 @@ ApplicationWindow {
 
                         // Create a new Prompt instance using the controller's method
                         var prompt = controller.createPrompt();
+                        prompt.recomposeFile = recomposeFileField.text;
                         prompt.instrument = instrumentComboBox.currentText;
                         prompt.tempo = parseInt(tempoField.text);
                         prompt.timeSignatureNumerator = parseInt(timeSigTop.text);
