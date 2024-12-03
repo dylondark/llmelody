@@ -63,23 +63,6 @@ ApplicationWindow {
                 text: "llama3.2:3b"
                 Layout.fillWidth: true
             }
-
-            // ROW: EDIT PROMPT
-            Label {
-                text: "Edit Prompt: "
-                horizontalAlignment: Text.AlignRight
-                Layout.fillWidth: true
-            }
-            Button {
-                id: editPromptButton
-                text: "Edit..."
-                Layout.fillWidth: true
-                onClicked: {
-                    var component = Qt.createComponent("OllamaPrompt.qml");
-                    var ollamaPrompt = component.createObject(base);
-                    ollamaPrompt.show();
-                }
-            }
         }
 
         Button {
