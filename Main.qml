@@ -28,12 +28,14 @@ ApplicationWindow {
             ollamaStatus.text = "Ollama: <font color=\"#00FF00\">Connected</font>";
             root.title = "llmelody - Ready";
             programStatus.text = "Ready";
+            generateButton.enabled = true;
         }
         else
         {
             ollamaStatus.text = "Ollama: <font color=\"#FF0000\">Not Connected</font>";
             root.title = "llmelody - Waiting for Connection...";
             programStatus.text = "Waiting for Connection...";
+            generateButton.enabled = false;
         }
     }
 
